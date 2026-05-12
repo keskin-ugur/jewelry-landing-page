@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────
+   Design tokens
+───────────────────────────────────────── */
+:root {
+  --gold:         #C9A84C;
+  --gold-light:   #E8C76A;
+  --gold-bright:  #F0C040;
+  --gold-dark:    #9C7B2E;
+  --gold-deep:    #6B5210;
+  --cream:        #FDFDFD;
+  --cream-dark:   #F5F3EE;
+}
+
+/* ─────────────────────────────────────────
+   Base reset
+───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--cream);
+  color: #1a1a1a;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─────────────────────────────────────────
+   Golden Glow — primary utility class
+   Matches the warm metallic gold of 18k
+   yellow-gold PBR materials (hex #C9A84C).
+───────────────────────────────────────── */
+.golden-glow {
+  background: linear-gradient(
+    118deg,
+    var(--gold-deep)   0%,
+    var(--gold-dark)   18%,
+    var(--gold)        38%,
+    var(--gold-bright) 52%,
+    var(--gold-light)  60%,
+    var(--gold)        72%,
+    var(--gold-dark)   88%,
+    var(--gold-deep)   100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gold-shimmer 4s linear infinite;
+  filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.45))
+          drop-shadow(0 0 28px rgba(201, 168, 76, 0.2));
+}
+
+@keyframes hero-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.hero-marquee {
+  animation: hero-marquee 28s linear infinite;
+}
+
+@keyframes gold-shimmer {
+  0%   { background-position: 0%   center; }
+  100% { background-position: 200% center; }
+}
+
+.golden-text {
+  color: var(--gold);
+  text-shadow:
+    0 0 15px rgba(201, 168, 76, 0.35),
+    0 0 40px rgba(201, 168, 76, 0.15);
+}
+
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold-dark) 20%,
+    var(--gold)      50%,
+    var(--gold-dark) 80%,
+    transparent
+  );
+  opacity: 0.6;
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.luxury-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+  padding: 12px 0;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.luxury-input::placeholder {
+  color: rgba(26, 26, 26, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+}
+.luxury-input:focus {
+  border-bottom-color: var(--gold);
+}
+
+.luxury-btn {
+  display: inline-block;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding: 14px 40px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s ease;
+}
+.luxury-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+.luxury-btn:hover::before {
+  transform: translateX(0);
+}
+.luxury-btn span {
+  position: relative;
+  z-index: 1;
+}
+.luxury-btn:hover span {
+  color: var(--cream);
+}
